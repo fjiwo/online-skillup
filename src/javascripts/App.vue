@@ -2,9 +2,9 @@
   <div>
     <p>
       <img class="logo" src="../images/logo.jpg" alt="ロゴ">
-      <span class="sample">サンプルコードaaa</span>
+      <span class="sample">サンプルコード</span>
     </p>
-    <MyComponent :message="$data.message" />
+    <MyComponent :messages="$data.messages" />
     <form @submit="onSubmit">
       <input v-model="$data.text" type="text">
       <button type="submit">送信</button>
@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      message: '',
+      messages: [],
       text: ''
     };
   },
@@ -32,10 +32,9 @@ export default {
     socket.on('connect', () => {
       console.log('connected!');
     });
-
     socket.on('send', (message) => {
       console.log(message);
-      this.$data.message = message;
+      this.$data.messages.push(message);
     });
   },
   methods: {

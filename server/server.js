@@ -32,14 +32,17 @@ const server = app.listen(process.env.PORT || 4000, '0.0.0.0', () => {
   const port = server.address().port;
   console.log(`START SERVER http://${host}:${port}`);
 });
-
+const messages = [];
 // socketサーバーを立ち上げる
 const io = require('socket.io')(server, { origins: '*:*' });
 
 // socketイベントの設定
 io.on('connection', (socket) => {
   console.log('connected:', socket.id);
-
+  // コネクション確立時にサーバー側に保存されているメッセージを渡す。
+  for (const i in messages) {
+    socket.emit('send', messages[i]);
+  }
   // 切断時
   socket.on('disconnect', () => {
     console.log('disconnected:', socket.id);
@@ -48,6 +51,7 @@ io.on('connection', (socket) => {
   // ユーザの参加
   socket.on('send', (message) => {
     console.log('send:', message);
+    messages.push(message);
     io.emit('send', message);
   });
 });

@@ -1,5 +1,11 @@
 <template>
-  <div>{{ $props.message }}</div>
+  <div>
+    <ul>
+      <template v-for="item in $props.messages">
+        <li :key="item.id">{{item}}</li>
+      </template>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -7,7 +13,7 @@ import VueTypes from 'vue-types';
 
 export default {
   props: {
-    message: VueTypes.string.isRequired
+    messages: VueTypes.array.isRequired
   }
 };
 </script>

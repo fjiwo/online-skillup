@@ -1,14 +1,20 @@
 <template>
   <div>
-    <p>
-      <img class="logo" src="../images/logo.jpg" alt="ロゴ">
-      <span class="sample">サンプルコード</span>
-    </p>
-    <MyComponent :messages="$data.messages" />
-    <form @submit="onSubmit">
-      <input v-model="$data.text" type="text">
-      <button type="submit">送信</button>
-    </form>
+    <div class="container" style="overflow:auto; height:93vh;">
+      <p>
+        <img class="logo" src="../images/logo.jpg" alt="ロゴ">
+        <span class="sample">チャット</span>
+      </p>
+      <MyComponent :messages="$data.messages" />
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <form  class="form-inline" @submit="onSubmit">
+          <input class="form-control" v-model="$data.text" type="text" >
+          <button class="btn btn-primary" type="submit" >送信</button>
+        </form>
+      </div>
+    </footer>
   </div>
 </template>
 

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ul>
+    <ul class="list-group">
       <template v-for="item in $props.messages">
-        <li :key="item.id">{{item}}</li>
+        <li class="list-group-item" :key="item.id">{{item}}</li>
       </template>
     </ul>
   </div>

@@ -40,9 +40,7 @@ const io = require('socket.io')(server, { origins: '*:*' });
 io.on('connection', (socket) => {
   console.log('connected:', socket.id);
   // コネクション確立時にサーバー側に保存されているメッセージを渡す。
-  for (const i in messages) {
-    socket.emit('send', messages[i]);
-  }
+  socket.emit('init', messages);
   // 切断時
   socket.on('disconnect', () => {
     console.log('disconnected:', socket.id);

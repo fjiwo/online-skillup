@@ -42,6 +42,9 @@ export default {
       console.log(message);
       this.$data.messages.push(message);
     });
+    socket.on('init', (messageList) => {
+      this.$data.messages = messageList;
+    });
   },
   methods: {
     /**
@@ -49,7 +52,7 @@ export default {
      */
     onSubmit(e) {
       e.preventDefault();
-      socket.emit('send', this.$data.text);
+      socket.emit('send', { text: this.$data.text, user: 'aaa' });
     }
   }
 };

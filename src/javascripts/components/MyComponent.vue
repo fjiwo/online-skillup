@@ -2,7 +2,7 @@
   <div>
     <ul class="list-group">
       <template v-for="item in $props.messages">
-        <li class="list-group-item" :key="item.id">{{item}}</li>
+        <li class="list-group-item" :key="item.id">{{item.text}}</li>
       </template>
     </ul>
   </div>

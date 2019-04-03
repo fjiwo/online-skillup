@@ -5,6 +5,7 @@
         <img class="logo" src="../images/logo.jpg" alt="ロゴ">
         <span class="sample">チャット</span>
       </p>
+      <UserListComponent :userNum="$data.userNum" :userList="$data.userList"/>
     </div>
     <div class="container" style="overflow:auto; height:87vh;">
       <MyComponent :messages="$data.messages" :username="$data.username" />
@@ -25,16 +26,20 @@ import socket from './utils/socket';
 
 // components
 import MyComponent from './components/MyComponent.vue';
+import UserListComponent from './components/UserListComponent.vue';
 
 export default {
   components: {
-    MyComponent
+    MyComponent,
+    UserListComponent
   },
   data() {
     return {
       messages: [],
       text: '',
-      username: 'aaaa'
+      username: 'aaaa',
+      userNum: 0,
+      userList: []
     };
   },
   created() {
@@ -45,8 +50,28 @@ export default {
       console.log(message);
       this.$data.messages.push(message);
     });
+    // メッセージの初期化
     socket.on('init', (messageList) => {
       this.$data.messages = messageList;
+    });
+    // 参加人数の更新
+    socket.on('userNum', (num) => {
+      this.$data.userNum = num;
+    });
+    // 参加ユーザ名の取得
+    socket.on('join', (name) => {
+      console.log(name, 'さんが参加しました。');
+      this.$data.userList.push(name);
+    });
+    // 退出ユーザ名の取得
+    socket.on('leave', (name) => {
+      console.log(name, 'さんが退出しました。');
+      for (let i = 0; i < this.$data.userList.length; i++) {
+        if (this.$data.userList[i] === name) {
+          this.$data.userList.splice(i, 1);
+          break;
+        }
+      }
     });
 
     // ユーザ名の設定
@@ -56,6 +81,7 @@ export default {
     } else {
       this.username = inputedUserName;
     }
+    socket.emit('join', this.username);
   },
 
   methods: {

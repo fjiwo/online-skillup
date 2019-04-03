@@ -76,3 +76,34 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
   font-size: 15px;
   word-break: break-all;
 }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.menu {
+  width: 90px;
+  text-decoration: none;
+  background-color: #99f;
+  color: #000;
+  border: solid 1px #66c;
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.menu-item {
+  width: 90px;
+  text-decoration-color: #ccf;
+  color: #000;
+  border: solid 1px #66c;
+  border-top: none;
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}

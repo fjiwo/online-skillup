@@ -1,17 +1,19 @@
 <template>
   <div>
-    <div class="container" style="overflow:auto; height:93vh;">
+    <div class="header">
       <p>
         <img class="logo" src="../images/logo.jpg" alt="ロゴ">
         <span class="sample">チャット</span>
       </p>
-      <MyComponent :messages="$data.messages" />
+    </div>
+    <div class="container" style="overflow:auto; height:87vh;">
+      <MyComponent :messages="$data.messages" :username="$data.username" />
     </div>
     <footer class="footer">
       <div class="container">
-        <form  class="form-inline" @submit="onSubmit">
-          <input class="form-control" v-model="$data.text" type="text" >
-          <button class="btn btn-primary" type="submit" >送信</button>
+        <form  class="form-container" @submit="onSubmit">
+          <input class="message" v-model="$data.text" type="text" >
+          <button class="btn btn-primary submit" type="submit" >送信</button>
         </form>
       </div>
     </footer>
@@ -31,7 +33,8 @@ export default {
   data() {
     return {
       messages: [],
-      text: ''
+      text: '',
+      username: 'aaaa'
     };
   },
   created() {
@@ -45,14 +48,23 @@ export default {
     socket.on('init', (messageList) => {
       this.$data.messages = messageList;
     });
+
+    // ユーザ名の設定
+    const inputedUserName = window.prompt('ユーザ名を入力してください。', '');
+    if (inputedUserName.length === 0) {
+      this.username = '名無し';
+    } else {
+      this.username = inputedUserName;
+    }
   },
+
   methods: {
     /**
      * Enterボタンを押したとき
      */
     onSubmit(e) {
       e.preventDefault();
-      socket.emit('send', { text: this.$data.text, user: 'aaa' });
+      socket.emit('send', { text: this.$data.text, user: this.$data.username });
     }
   }
 };

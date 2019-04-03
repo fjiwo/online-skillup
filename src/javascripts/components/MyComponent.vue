@@ -1,10 +1,18 @@
 <template>
-  <div>
-    <ul class="list-group">
+  <div id="message-contents">
       <template v-for="item in $props.messages">
-        <li class="list-group-item" :key="item.id">{{item.text}}</li>
+        <div class="message-wrapper">
+          <div class="box" v-bind:class="{'mymessage' : item.user == username}">
+            <div class="content">
+              <p>
+                <strong>{{item.user}}</strong>
+                <br />
+                {{item.text}}
+              </p>
+             </div>
+          </div>
+        </div>
       </template>
-    </ul>
   </div>
 </template>
 
@@ -13,7 +21,19 @@ import VueTypes from 'vue-types';
 
 export default {
   props: {
-    messages: VueTypes.array.isRequired
+    messages: VueTypes.array.isRequired,
+    username: VueTypes.string.isRequired
+  },
+  watch: {
+    messages: function() {
+      this.$nextTick(() => this.scroll());
+    }
+  },
+  methods: {
+    scroll() {
+      const container = document.querySelector('#message-contents');
+      container.scrollIntoView(false);
+    }
   }
 };
 </script>

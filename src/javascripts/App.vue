@@ -7,14 +7,14 @@
       </p>
       <UserListComponent :userNum="$data.userNum" :userList="$data.userList"/>
     </div>
-    <div class="container" style="overflow:auto; height:87vh;">
+    <div class="container" style="overflow:auto;">
       <MyComponent :messages="$data.messages" :username="$data.username" />
     </div>
     <footer class="footer">
       <div class="container">
         <form  class="form-container" @submit="onSubmit">
           <input class="message" v-model="$data.text" type="text" >
-          <button class="btn btn-primary submit" type="submit" >送信</button>
+          <button class="submit btn btn-primary" type="submit" >送信</button>
         </form>
       </div>
     </footer>
@@ -76,7 +76,7 @@ export default {
 
     // ユーザ名の設定
     const inputedUserName = window.prompt('ユーザ名を入力してください。', '');
-    if (inputedUserName.length === 0) {
+    if (inputedUserName == null || inputedUserName.length === 0) {
       this.username = '名無し';
     } else {
       this.username = inputedUserName;

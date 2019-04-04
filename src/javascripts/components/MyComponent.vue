@@ -25,6 +25,7 @@ export default {
     username: VueTypes.string.isRequired
   },
   watch: {
+    // メッセージ更新時にスクロール
     messages: function() {
       this.$nextTick(() => this.scroll());
     }

@@ -3,17 +3,27 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 
+div, ul, li, a, p {
+  margin: 0;
+  padding: 0;
+}
+
 .header {
+  position: fixed;
   width: 100%;
+  height: 40px;
   text-align: center;
+  border-bottom: solid 1px #aaa;
+  padding: 5px;
+  background-color: #fff;
 }
 
 .footer {
-  //position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   height: 60px;
-  //background-color: #f5f5f5;
+  background-color: #fff;
 }
 
 .form-container {
@@ -38,9 +48,9 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
     right: 0;
     width: 80px;
     text-align: center;
-    background-color: #4f83e1;
     color: white;
     font-size: 1.6rem;
+    outline: none;
   }
 }
 
@@ -64,7 +74,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 #message-contents {
   z-index: 1;
-  padding: 55px 10px 76px 10px;
+  padding: 55px 10px 150px 10px;
   background: #fff;
 }
 
@@ -85,25 +95,34 @@ ul {
 }
 
 .menu {
-  width: 90px;
+  width: 100px;
   text-decoration: none;
-  background-color: #99f;
+  background-color: #ddd;
   color: #000;
-  border: solid 1px #66c;
-  display: block;
+  border: solid 1px #ddd;
   height: 30px;
   line-height: 30px;
-  text-align: center;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  border-radius: 10px;
 }
 
 .menu-item {
-  width: 90px;
+  width: 100px;
   text-decoration-color: #ccf;
+  background-color: #eee;
   color: #000;
-  border: solid 1px #66c;
+  border: solid 1px #eee;
   border-top: none;
-  display: block;
+  display: inline-block;
   height: 30px;
-  line-height: 30px;
+  line-height: 29px;
   text-align: center;
+  z-index: 2;
+  border-radius: 10px;
+}
+
+.float-left {
+  float: left;
 }

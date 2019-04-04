@@ -56,6 +56,8 @@ io.on('connection', (socket) => {
     console.log('disconnected:', socket.id);
     userNum--;
     io.emit('leave', users[socket.id]);
+    messages.push({ text: users[socket.id] + 'が退出しました。' });
+    io.emit('send', messages[messages.length - 1]);
     delete users[socket.id];
     io.emit('userNum', userNum);
   });
@@ -70,5 +72,7 @@ io.on('connection', (socket) => {
   socket.on('join', (name) => {
     users[socket.id] = name;
     io.emit('join', name);
+    messages.push({ text: name + 'が参加しました。' });
+    io.emit('send', messages[messages.length - 1]);
   });
 });

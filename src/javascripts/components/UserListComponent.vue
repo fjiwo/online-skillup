@@ -1,7 +1,7 @@
 <template>
-  <div @mouseleave="$data.isShown = false">
-    <p @mouseover="$data.isShown = true" style="display: inline-block;">
-      <span>参加人数： {{ $props.userNum }}</span>
+  <div @mouseleave="$data.isShown = false" class="menu">
+    <p @mouseover="$data.isShown = true">
+      <span>参加人数： {{ $props.userNum }}▼</span>
     </p>
     <transition
     @before-enter="beforeEnter"
@@ -17,9 +17,9 @@
     </transition>
   </div>
 </template>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
 <script>
 import VueTypes from 'vue-types';
+import anime from 'animejs';
 export default {
   props: {
     userNum: VueTypes.integer.isRequired,

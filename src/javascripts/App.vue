@@ -91,6 +91,7 @@ export default {
     onSubmit(e) {
       e.preventDefault();
       socket.emit('send', { text: this.$data.text, user: this.$data.username });
+      this.$data.text = '';
     }
   }
 };
